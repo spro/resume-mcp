@@ -23,7 +23,7 @@ import { resume, resumeAsMarkdown, searchResume } from "./resume"
 
 // Define our MCP agent with tools
 export class MyMCP extends McpAgent {
-    server = new McpServer({ name: "Sean Resume Server", version: "1.0.0" });
+    server = new McpServer({ name: "Sean Robertson (spro)'s Resume Server", version: "1.0.0" });
 
     async init() {
         // Basics
@@ -68,7 +68,7 @@ export class MyMCP extends McpAgent {
             content: [{ type: "text", text: JSON.stringify(resume.projects, null, 2) }],
         }));
 
-        // Skills (optional category)
+        // Skills
         this.server.tool(
             "resume_skills",
             z.object({ category: z.enum(["highLevel", "languages", "frameworks", "toolsPlatforms", "databases"]).optional() }),
