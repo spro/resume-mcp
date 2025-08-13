@@ -68,6 +68,11 @@ export class MyMCP extends McpAgent {
             content: [{ type: "text", text: JSON.stringify(resume.projects, null, 2) }],
         }));
 
+        // Personal projects
+        this.server.tool("resume_personal_projects", z.object({}), async () => ({
+            content: [{ type: "text", text: JSON.stringify(resume.personalProjects, null, 2) }],
+        }));
+
         // Skills
         this.server.tool(
             "resume_skills",

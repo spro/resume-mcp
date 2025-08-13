@@ -11,8 +11,10 @@ export const resume = {
         },
         title: "Web-focused full-stack engineer with AI research experience",
     },
+
     summary:
         "Full‑stack engineer and architect with deep experience shipping web/mobile products, leading teams, and integrating practical AI/LLM capabilities. Built platforms, data pipelines, developer tooling, and microservice systems across cloud and on‑prem.",
+
     education: [
         {
             institution: "Massachusetts Institute of Technology",
@@ -23,6 +25,7 @@ export const resume = {
             ],
         },
     ],
+
     experience: [
         {
             role: "Lead Engineer and Architect",
@@ -81,6 +84,7 @@ export const resume = {
                     ],
                 },
             ],
+
             internalTools: [
                 {
                     name: "Somata — Microservices framework",
@@ -100,6 +104,7 @@ export const resume = {
             ],
         },
     ],
+
     projects: [
         {
             name: "RARNN — Recursive Application of RNNs",
@@ -118,7 +123,51 @@ export const resume = {
                 "Adopted as the first official PyTorch NLP tutorials",
             ],
         },
+        {
+            name: "Simon (Nginx + Lua + Redis)",
+            description: "Dynamic routing / virtual hosts for Nginx using Lua and Redis.",
+            link: "https://github.com/spro/simon"
+        },
     ],
+
+    personalProjects: [
+        {
+            name: "HashPipe",
+            description: "JSON-first, Bash-like shell language with parallel pipes.",
+            link: "https://github.com/spro/hashpipe"
+        },
+        {
+            name: "knobbox",
+            description: "Modal USB knob built with AVR/ATTiny microcontrollers.",
+            link: "https://iams.pro/projects/knobbox"
+        },
+        {
+            name: "megaminimidi",
+            description: "USB MIDI controller using ATMega328P and V-USB; featured laser-cut design.",
+            link: "https://iams.pro/projects/megaminimidi"
+        },
+        {
+            name: "blink(inch)",
+            description: "A blink(1) clone built with ATTiny85 and V-USB, 3D-printed enclosure.",
+            link: "https://iams.pro/projects/blink-inch"
+        },
+        {
+            name: "viewbox",
+            description: "Light box for ambient information display built with ATTiny85 and laser-cut hardware.",
+            link: "https://iams.pro/projects/viewbox"
+        },
+        {
+            name: "atmegahub",
+            description: "Radio-to-WiFi bridge for low-power devices using ATMega328P, ESP8266, and nRF24L01.",
+            link: "https://iams.pro/projects/atmegahub"
+        },
+        {
+            name: "attinyusb",
+            description: "USB-ready ATTiny85 board with V-USB HID support.",
+            link: "https://iams.pro/projects/attinyusb"
+        }
+    ],
+
     skills: {
         highLevel: [
             "Full‑stack web/mobile applications",
