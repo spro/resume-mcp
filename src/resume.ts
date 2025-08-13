@@ -124,9 +124,12 @@ export const resume = {
             ],
         },
         {
-            name: "Simon (Nginx + Lua + Redis)",
-            description: "Dynamic routing / virtual hosts for Nginx using Lua and Redis.",
-            link: "https://github.com/spro/simon"
+            name: "Simon says",
+            link: "https://github.com/spro/simon",
+            details: [
+                "Dynamic routing / virtual hosts for Nginx using Lua and Redis",
+                "Handles load balancing, session awareness, and wildcard domains",
+            ],
         },
     ],
 
