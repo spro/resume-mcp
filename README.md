@@ -9,13 +9,13 @@ If you use Claude Desktop, the easiest way is to go to **Settings > Connectors >
 - **SSE Endpoint**: `https://resume-mcp.sprobertson.workers.dev/sse`
 - **HTTP Endpoint**: `https://resume-mcp.sprobertson.workers.dev/mcp`
 
-## Available info
+## Available tools
 
 ### Basics
-- **`resume_basics`** - Get basic contact information and personal details
-  - Example: "What are Sean's contact details?"
+- **`resume_contact`** - Get contact information
+  - Example: "What is Sean's email address?"
 
-- **`resume_summary`** - Get professional summary
+- **`resume_summary`** - Get a brief overview/summary
   - Example: "Tell me about Sean's professional background"
 
 ### Experience & Education
@@ -39,11 +39,12 @@ If you use Claude Desktop, the easiest way is to go to **Settings > Connectors >
   - Example: "What are Sean's technical skills?"
   - Example: "What programming languages does Sean know?"
 
-### Search & Export
+### Search
 - **`resume_search`** - Search across all resume content
   - Parameters: `query` (string, required)
   - Example: "Find mentions of LLMs in Sean's resume"
 
-- **`resume_as_markdown`** - Export the entire resume as formatted markdown
-  - Example: "Show me Sean's full resume in markdown format"
+## Available resources
+
+- **`resume_as_markdown`** - Use the entire resume formatted as markdown
 
