@@ -11,7 +11,7 @@ import { resume, resumeAsMarkdown, searchResume } from "./resume"
 //  - HTTP:      /mcp
 //  - SSE:       /sse (or /sse/message)
 // Tools:
-//  - resume.basics
+//  - resume.contact
 //  - resume.summary
 //  - resume.education
 //  - resume.experience (optional filters)
@@ -26,29 +26,41 @@ export class MyMCP extends McpAgent {
     server = new McpServer({ name: "Sean Robertson (spro)'s Resume Server", version: "1.0.0" });
 
     async init() {
-        // Basics
-        this.server.tool("resume_basics", z.object({}), async () => ({
-            content: [{ type: "text", text: JSON.stringify(resume.basics, null, 2) }],
+        // Contact
+        this.server.registerTool("resume_contact", {
+            title: "Sean's contact info",
+            description: "Get Sean's email, links, and tagline."
+        }, async () => ({
+            content: [{ type: "text", text: JSON.stringify(resume.contact, null, 2) }],
         }));
 
         // Summary
-        this.server.tool("resume_summary", z.object({}), async () => ({
+        this.server.registerTool("resume_summary", {
+            title: "Sean's professional summary",
+            description: "Get Sean's professional summary and career overview."
+        }, async () => ({
             content: [{ type: "text", text: resume.summary }],
         }));
 
         // Education
-        this.server.tool("resume_education", z.object({}), async () => ({
+        this.server.registerTool("resume_education", {
+            title: "Sean's education background",
+            description: "Get information about Sean's educational background and qualifications."
+        }, async () => ({
             content: [{ type: "text", text: JSON.stringify(resume.education, null, 2) }],
         }));
 
         // Experience with optional filters
-        this.server.tool(
-            "resume_experience",
-            z.object({
-                company: z.string().optional(),
-                role: z.string().optional(),
-                year: z.number().int().optional(),
-            }),
+        this.server.registerTool("resume_experience",
+            {
+                title: "Sean's work experience",
+                description: "Get information about the companies Sean has worked for in the past.",
+                inputSchema: {
+                    company: z.string().optional(),
+                    role: z.string().optional(),
+                    year: z.number().int().optional(),
+                }
+            },
             async ({ company, role, year }) => {
                 let data = resume.experience;
                 if (company) data = data.filter((j) => j.company.toLowerCase().includes(company.toLowerCase()));
@@ -64,19 +76,30 @@ export class MyMCP extends McpAgent {
         );
 
         // Projects
-        this.server.tool("resume_projects", z.object({}), async () => ({
+        this.server.registerTool("resume_projects", {
+            title: "Sean's professional projects",
+            description: "Get information about Sean's professional projects and work."
+        }, async () => ({
             content: [{ type: "text", text: JSON.stringify(resume.projects, null, 2) }],
         }));
 
         // Personal projects
-        this.server.tool("resume_personal_projects", z.object({}), async () => ({
+        this.server.registerTool("resume_personal_projects", {
+            title: "Sean's personal projects",
+            description: "Get information about Sean's personal projects and side work."
+        }, async () => ({
             content: [{ type: "text", text: JSON.stringify(resume.personalProjects, null, 2) }],
         }));
 
         // Skills
-        this.server.tool(
-            "resume_skills",
-            z.object({ category: z.enum(["highLevel", "languages", "frameworks", "toolsPlatforms", "databases"]).optional() }),
+        this.server.registerTool("resume_skills",
+            {
+                title: "Sean's technical skills",
+                description: "Get information about Sean's technical skills, optionally filtered by category.",
+                inputSchema: {
+                    category: z.enum(["highLevel", "languages", "frameworks", "toolsPlatforms", "databases"]).optional()
+                },
+            },
             async ({ category }) => {
                 const data = category ? (resume.skills as any)[category] : resume.skills;
                 return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
@@ -84,14 +107,24 @@ export class MyMCP extends McpAgent {
         );
 
         // Search
-        this.server.tool("resume_search", z.object({ query: z.string().min(1) }), async ({ query }) => {
-            const hits = searchResume(query);
-            return { content: [{ type: "text", text: JSON.stringify({ query, hits }, null, 2) }] };
-        });
+        this.server.registerTool("resume_search",
+            {
+                title: "Search Sean's resume",
+                description: "Search through Sean's resume content using keywords.",
+                inputSchema: { query: z.string().min(1) }
+            },
+            async ({ query }) => {
+                const hits = searchResume(query);
+                return { content: [{ type: "text", text: JSON.stringify({ query, hits }, null, 2) }] };
+            });
 
         // Markdown export
-        this.server.tool("resume_as_markdown", z.object({}), async () => ({
-            content: [{ type: "text", text: resumeAsMarkdown }],
+        this.server.registerResource("resume_as_markdown", "sean://resume/markdown", {
+            title: "Sean's resume as markdown",
+            description: "Get Sean's complete resume formatted as markdown.",
+            mimeType: "text/markdown",
+        }, async (uri) => ({
+            contents: [{ uri: uri.href, text: resumeAsMarkdown }],
         }));
     }
 }

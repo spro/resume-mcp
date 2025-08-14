@@ -1,6 +1,6 @@
 // --- Static resume data --- //
 export const resume = {
-    basics: {
+    contact: {
         name: "Sean Paul Robertson",
         location: "Seattle, WA",
         email: "sprobertson@gmail.com",
@@ -13,7 +13,7 @@ export const resume = {
     },
 
     summary:
-        "Full‑stack engineer and architect with deep experience shipping web/mobile products, leading teams, and integrating practical AI/LLM capabilities. Built platforms, data pipelines, developer tooling, and microservice systems across cloud and on‑prem.",
+        "Full‑stack engineer and architect with deep experience shipping web/mobile products, leading teams, and integrating practical AI/LLM capabilities. I've built platforms, data pipelines, developer tooling, and microservice systems across cloud and on‑prem.",
 
     education: [
         {
@@ -231,12 +231,12 @@ export const resume = {
 // Helpers
 export const resumeToMarkdown = () => {
     const lines: string[] = [];
-    lines.push(`# ${resume.basics.name}`);
-    lines.push(`${resume.basics.location} · ${resume.basics.email}`);
+    lines.push(`# ${resume.contact.name}`);
+    lines.push(`${resume.contact.location} · ${resume.contact.email}`);
     lines.push(
-        `${resume.basics.links.linkedin} · ${resume.basics.links.github} · ${resume.basics.links.website}`
+        `${resume.contact.links.linkedin} · ${resume.contact.links.github} · ${resume.contact.links.website}`
     );
-    lines.push("\n" + resume.basics.title + "\n");
+    lines.push("\n" + resume.contact.title + "\n");
     lines.push("## Experience");
     for (const job of resume.experience) {
         lines.push(`\n### ${job.role}, ${job.company} — ${job.location} (${job.period})`);
@@ -286,8 +286,8 @@ export function searchResume(query: string) {
     const q = query.trim();
     const hits: Array<{ section: string; path: string; text: string }> = [];
 
-    // Basics & summary
-    if (contains(resume.basics.name, q)) hits.push({ section: "basics", path: "name", text: resume.basics.name });
+    // contact & summary
+    if (contains(resume.contact.name, q)) hits.push({ section: "contact", path: "name", text: resume.contact.name });
     if (contains(resume.summary, q)) hits.push({ section: "summary", path: "summary", text: resume.summary });
 
     // Experience
