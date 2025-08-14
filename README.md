@@ -22,7 +22,7 @@ If you use Claude Desktop, the easiest way is to go to **Settings > Connectors >
 - **`resume_experience`** - Get work experience with optional filters
   - Parameters: `company` (string), `role` (string), `year` (number)
   - Example: "What was Sean doing in 2020?"
-  - Example: "What did Sean build for Level Solar?"
+  - Example: "What did Sean build for Nuve Platform?"
 
 - **`resume_education`** - Get educational background
   - Example: "Where did Sean go to school?"
