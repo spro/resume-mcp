@@ -22,7 +22,7 @@ import { resume, resumeAsMarkdown, searchResume } from "./resume"
 // ---------------------------------------------
 
 // Define our MCP agent with tools
-export class MyMCP extends McpAgent {
+export class SeansResumeMCP extends McpAgent {
     server = new McpServer({ name: "Sean Robertson (spro)'s Resume Server", version: "1.0.0" });
 
     async init() {
@@ -134,11 +134,11 @@ export default {
         const url = new URL(request.url);
 
         if (url.pathname === "/sse" || url.pathname === "/sse/message") {
-            return MyMCP.serveSSE("/sse").fetch(request, env, ctx);
+            return SeansResumeMCP.serveSSE("/sse").fetch(request, env, ctx);
         }
 
         if (url.pathname === "/mcp") {
-            return MyMCP.serve("/mcp").fetch(request, env, ctx);
+            return SeansResumeMCP.serve("/mcp").fetch(request, env, ctx);
         }
 
         return new Response("Not found", { status: 404 });

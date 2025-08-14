@@ -17,7 +17,7 @@
 	"migrations": [
 		{
 			"new_sqlite_classes": [
-				"MyMCP"
+				"SeansResumeMCP"
 			],
 			"tag": "v1"
 		}
@@ -25,7 +25,7 @@
 	"durable_objects": {
 		"bindings": [
 			{
-				"class_name": "MyMCP",
+				"class_name": "SeansResumeMCP",
 				"name": "MCP_OBJECT"
 			}
 		]
