@@ -1,28 +1,17 @@
-# spro's Resume MCP Server
+# Sean's Resume as an MCP Server
 
-Use MCP to learn about me instead of reading a boring PDF file.
+Use MCP to learn about me instead of reading a [boring PDF file](https://spro.ai/resume.pdf).
 
-## Connection to Claude Desktop
+## How to connect
 
-Add this configuration to your Claude Desktop settings file:
+If you use Claude Desktop, the easiest way is to go to **Settings > Connectors > Add custom connector** and paste in the SSE Endpoint. If you prefer a different MCP client, use that instead.
 
-```json
-{
-  "mcpServers": {
-    "resume-mcp": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-stdio"],
-      "env": {
-        "MCP_SERVER_URL": "https://resume-mcp.sprobertson.workers.dev/sse"
-      }
-    }
-  }
-}
-```
+- **SSE Endpoint**: `https://resume-mcp.sprobertson.workers.dev/sse`
+- **HTTP Endpoint**: `https://resume-mcp.sprobertson.workers.dev/mcp`
 
-## Available Tools
+## Available info
 
-### Basic Information
+### Basics
 - **`resume_basics`** - Get basic contact information and personal details
   - Example: "What are Sean's contact details?"
 
@@ -33,6 +22,7 @@ Add this configuration to your Claude Desktop settings file:
 - **`resume_experience`** - Get work experience with optional filters
   - Parameters: `company` (string), `role` (string), `year` (number)
   - Example: "What was Sean doing in 2020?"
+  - Example: "What did Sean build for Level Solar?"
 
 - **`resume_education`** - Get educational background
   - Example: "Where did Sean go to school?"
@@ -57,7 +47,3 @@ Add this configuration to your Claude Desktop settings file:
 - **`resume_as_markdown`** - Export the entire resume as formatted markdown
   - Example: "Show me Sean's full resume in markdown format"
 
-## Server Endpoints
-
-- **SSE Endpoint**: `https://resume-mcp.sprobertson.workers.dev/sse`
-- **HTTP Endpoint**: `https://resume-mcp.sprobertson.workers.dev/mcp`
