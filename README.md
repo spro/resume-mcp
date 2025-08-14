@@ -1,50 +1,63 @@
-# Building a Remote MCP Server on Cloudflare (Without Auth)
+# spro's Resume MCP Server
 
-This example allows you to deploy a remote MCP server that doesn't require authentication on Cloudflare Workers. 
+Use MCP to learn about me instead of reading a boring PDF file.
 
-## Get started: 
+## Connection to Claude Desktop
 
-[![Deploy to Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/ai/tree/main/demos/remote-mcp-authless)
-
-This will deploy your MCP server to a URL like: `remote-mcp-server-authless.<your-account>.workers.dev/sse`
-
-Alternatively, you can use the command line below to get the remote MCP Server created on your local machine:
-```bash
-npm create cloudflare@latest -- my-mcp-server --template=cloudflare/ai/demos/remote-mcp-authless
-```
-
-## Customizing your MCP Server
-
-To add your own [tools](https://developers.cloudflare.com/agents/model-context-protocol/tools/) to the MCP server, define each tool inside the `init()` method of `src/index.ts` using `this.server.tool(...)`. 
-
-## Connect to Cloudflare AI Playground
-
-You can connect to your MCP server from the Cloudflare AI Playground, which is a remote MCP client:
-
-1. Go to https://playground.ai.cloudflare.com/
-2. Enter your deployed MCP server URL (`remote-mcp-server-authless.<your-account>.workers.dev/sse`)
-3. You can now use your MCP tools directly from the playground!
-
-## Connect Claude Desktop to your MCP server
-
-You can also connect to your remote MCP server from local MCP clients, by using the [mcp-remote proxy](https://www.npmjs.com/package/mcp-remote). 
-
-To connect to your MCP server from Claude Desktop, follow [Anthropic's Quickstart](https://modelcontextprotocol.io/quickstart/user) and within Claude Desktop go to Settings > Developer > Edit Config.
-
-Update with this configuration:
+Add this configuration to your Claude Desktop settings file:
 
 ```json
 {
   "mcpServers": {
-    "calculator": {
+    "resume-mcp": {
       "command": "npx",
-      "args": [
-        "mcp-remote",
-        "http://localhost:8787/sse"  // or remote-mcp-server-authless.your-account.workers.dev/sse
-      ]
+      "args": ["-y", "@modelcontextprotocol/server-stdio"],
+      "env": {
+        "MCP_SERVER_URL": "https://resume-mcp.sprobertson.workers.dev/sse"
+      }
     }
   }
 }
 ```
 
-Restart Claude and you should see the tools become available. 
+## Available Tools
+
+### Basic Information
+- **`resume_basics`** - Get basic contact information and personal details
+  - Example: "What are Sean's contact details?"
+
+- **`resume_summary`** - Get professional summary
+  - Example: "Tell me about Sean's professional background"
+
+### Experience & Education
+- **`resume_experience`** - Get work experience with optional filters
+  - Parameters: `company` (string), `role` (string), `year` (number)
+  - Example: "What was Sean doing in 2020?"
+
+- **`resume_education`** - Get educational background
+  - Example: "Where did Sean go to school?"
+
+### Projects & Skills
+- **`resume_projects`** - Get professional projects
+  - Example: "What projects has Sean worked on?"
+
+- **`resume_personal_projects`** - Get personal/side projects
+  - Example: "What personal projects has Sean built?"
+
+- **`resume_skills`** - Get technical skills with optional category filter
+  - Parameters: `category` (enum: "highLevel", "languages", "frameworks", "toolsPlatforms", "databases")
+  - Example: "What are Sean's technical skills?"
+  - Example: "What programming languages does Sean know?"
+
+### Search & Export
+- **`resume_search`** - Search across all resume content
+  - Parameters: `query` (string, required)
+  - Example: "Find mentions of LLMs in Sean's resume"
+
+- **`resume_as_markdown`** - Export the entire resume as formatted markdown
+  - Example: "Show me Sean's full resume in markdown format"
+
+## Server Endpoints
+
+- **SSE Endpoint**: `https://resume-mcp.sprobertson.workers.dev/sse`
+- **HTTP Endpoint**: `https://resume-mcp.sprobertson.workers.dev/mcp`
