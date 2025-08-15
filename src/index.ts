@@ -119,7 +119,7 @@ export class SeansResumeMCP extends McpAgent {
             });
 
         // Markdown export
-        this.server.registerResource("resume_as_markdown", "sean://resume/markdown", {
+        this.server.registerResource("resume_as_markdown", "spro://resume/markdown", {
             title: "Sean's resume as markdown",
             description: "Get Sean's complete resume formatted as markdown.",
             mimeType: "text/markdown",
